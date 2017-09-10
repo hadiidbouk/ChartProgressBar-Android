@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.widget.LinearLayout;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
@@ -16,14 +17,17 @@ public class ChartProgressBar extends LinearLayout {
 
 	public ChartProgressBar(Context context) {
 		super(context);
+		setGravity(Gravity.CENTER);
 	}
 
 	public ChartProgressBar(Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
+		setGravity(Gravity.CENTER);
 	}
 
 	public ChartProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
+		setGravity(Gravity.CENTER);
 	}
 
 
@@ -39,6 +43,7 @@ public class ChartProgressBar extends LinearLayout {
 		private int mBarRadius;
 		private Context mContext;
 		private DisplayMetrics mMetrics;
+		private int mBarMargins;
 
 		public Builder setContext(Context context) {
 			mContext = context;
@@ -65,6 +70,10 @@ public class ChartProgressBar extends LinearLayout {
 			return this;
 		}
 
+		public Builder setBarMargins(int barMargins) {
+			mBarMargins = barMargins;
+			return this;
+		}
 		public Builder setMaxValue(float maxValue) {
 			mMaxValue = maxValue;
 			return this;
@@ -89,6 +98,7 @@ public class ChartProgressBar extends LinearLayout {
 
 			mMetrics = Resources.getSystem().getDisplayMetrics();
 
+
 			for (float value : mDataList) {
 				RoundCornerProgressBar bar = getBar(value);
 				mChart.addView(bar);
@@ -110,10 +120,9 @@ public class ChartProgressBar extends LinearLayout {
 				getDPI(mBarWidth)
 			);
 
-			progressParams.setMargins(-mBarHeight,0,0,0);
+			progressParams.setMargins(-getDPI(mBarHeight) + getDPI(mBarMargins),0,0,0);
 
 			bar.setLayoutParams(progressParams);
-			bar.setPadding(0,0,0,0);
 			return bar;
 		}
 

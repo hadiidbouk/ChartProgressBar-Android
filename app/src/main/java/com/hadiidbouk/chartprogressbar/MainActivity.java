@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
 		ChartProgressBar chart = (ChartProgressBar) findViewById(R.id.ProgressBarChart);
 
-		chart.setGravity(Gravity.CENTER);
 		ChartProgressBar.Builder chartBuilder = new ChartProgressBar.Builder();
 		chartBuilder
 			.setContext(this)
@@ -36,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 			.setBarHeight(100)
 			.setDataList(dataList)
 			.setMaxValue(10)
+			.setBarMargins(20)
 			.setBarRadius(45)
 			.setEmptyColor(R.color.empty)
 			.setFillColor(R.color.fill)

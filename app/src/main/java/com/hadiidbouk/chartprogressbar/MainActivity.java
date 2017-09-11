@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 			.setBarHeight(170)
 			.setDataList(dataList)
 			.setMaxValue(10)
-			.setBarMargins(40)
 			.setBarRadius(45)
 			.setEmptyBarColor(R.color.empty)
 			.setProgressBarColor(R.color.progress)

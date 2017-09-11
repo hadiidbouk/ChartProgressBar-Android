@@ -46,7 +46,6 @@ public class ChartProgressBar extends LinearLayout {
 		private int mBarRadius;
 		private Context mContext;
 		private DisplayMetrics mMetrics;
-		private int mBarMargins;
 
 		public Builder setContext(Context context) {
 			mContext = context;

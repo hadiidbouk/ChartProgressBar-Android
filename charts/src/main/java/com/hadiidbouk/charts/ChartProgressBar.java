@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ScaleDrawable;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ChartProgressBar extends LinearLayout {
+
+	private static ChartProgressBar instance;
 
 	public ChartProgressBar(Context context) {
 		super(context);
@@ -54,6 +57,7 @@ public class ChartProgressBar extends LinearLayout {
 
 		public Builder setChart(ChartProgressBar chart) {
 			mChart = chart;
+			instance = chart;
 			return this;
 		}
 
@@ -72,10 +76,6 @@ public class ChartProgressBar extends LinearLayout {
 			return this;
 		}
 
-		public Builder setBarMargins(int barMargins) {
-			mBarMargins = barMargins;
-			return this;
-		}
 
 		public Builder setMaxValue(float maxValue) {
 			mMaxValue = maxValue;
@@ -182,8 +182,41 @@ public class ChartProgressBar extends LinearLayout {
 			return (size * mMetrics.densityDpi) / DisplayMetrics.DENSITY_DEFAULT;
 		}
 
-
 	}
 
+
+	public static void animateBars() {
+
+		if (instance == null)
+			return;
+
+		final int childCount = instance.getChildCount();
+		Handler handler = new Handler();
+
+		for (int i = 0; i < childCount; i++) {
+
+			LinearLayout barContainer = (LinearLayout) instance.getChildAt(i);
+			int contentCount = barContainer.getChildCount();
+
+			for (int j = 0; j < contentCount; j++) {
+
+				View view = barContainer.getChildAt(j);
+
+				if (view instanceof Bar) {
+
+					final Bar bar = (Bar) view;
+
+					handler.postDelayed(new Runnable() {
+						@Override public void run() {
+							BarAnimation anim = new BarAnimation(bar, 0, bar.getProgress());
+							anim.setDuration(250);
+							bar.startAnimation(anim);
+						}
+					}, 100 * j);
+				}
+			}
+
+		}
+	}
 
 }

@@ -212,7 +212,7 @@ public class ChartProgressBar extends LinearLayout {
 							anim.setDuration(250);
 							bar.startAnimation(anim);
 						}
-					}, 100 * j);
+					}, 100 * i);
 				}
 			}
 

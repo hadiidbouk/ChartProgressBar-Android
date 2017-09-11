@@ -1,4 +1,4 @@
-package com.hadiidbouk.library;
+package com.hadiidbouk.charts;
 
 public class BarData {
 

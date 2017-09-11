@@ -3,8 +3,8 @@ package com.hadiidbouk.chartprogressbar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.hadiidbouk.library.BarData;
-import com.hadiidbouk.library.ChartProgressBar;
+import com.hadiidbouk.charts.BarData;
+import com.hadiidbouk.charts.ChartProgressBar;
 
 import java.util.ArrayList;
 

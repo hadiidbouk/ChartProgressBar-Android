@@ -7,7 +7,7 @@
 	android:layout_height="match_parent"
 	tools:context="com.hadiidbouk.chartprogressbar.MainActivity">
 
-	<com.hadiidbouk.library.ChartProgressBar
+	<com.hadiidbouk.charts.ChartProgressBar
 		android:id="@+id/ProgressBarChart"
 		android:layout_width="match_parent"
 		android:layout_centerInParent="true"

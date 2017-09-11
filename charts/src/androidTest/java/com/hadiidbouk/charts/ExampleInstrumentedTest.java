@@ -1,4 +1,4 @@
-package com.hadiidbouk.library;
+package com.hadiidbouk.charts;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

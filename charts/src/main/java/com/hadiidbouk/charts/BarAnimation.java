@@ -1,4 +1,4 @@
-package com.hadiidbouk.library;
+package com.hadiidbouk.charts;
 
 import android.view.animation.Animation;
 import android.view.animation.Transformation;

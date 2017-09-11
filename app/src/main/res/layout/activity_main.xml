@@ -11,6 +11,8 @@
 		android:id="@+id/ProgressBarChart"
 		android:layout_width="match_parent"
 		android:layout_centerInParent="true"
+		android:layout_marginStart="30dp"
+		android:layout_marginEnd="30dp"
 		android:layout_height="200dp"/>
 
 </RelativeLayout>

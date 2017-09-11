@@ -4,6 +4,6 @@
 	<color name="colorPrimaryDark">#303F9F</color>
 	<color name="colorAccent">#FF4081</color>
 
-	<color name="empty">#aaaa</color>
-	<color name="fill">#8c9eff</color>
+	<color name="empty">#ffc1c1</color>
+	<color name="progress">#8c9eff</color>
 </resources>

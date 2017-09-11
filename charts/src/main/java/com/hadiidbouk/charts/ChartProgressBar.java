@@ -102,6 +102,7 @@ public class ChartProgressBar extends LinearLayout {
 
 			mMetrics = Resources.getSystem().getDisplayMetrics();
 
+			mChart.removeAllViews();
 
 			for (BarData data : mDataList) {
 				LinearLayout bar = getBar(data.getBarTitle(), data.getBarValue());

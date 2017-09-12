@@ -19,8 +19,6 @@ import java.util.ArrayList;
 
 public class ChartProgressBar extends LinearLayout {
 
-	private static ChartProgressBar instance;
-
 	public ChartProgressBar(Context context) {
 		super(context);
 		setGravity(Gravity.CENTER);
@@ -57,7 +55,6 @@ public class ChartProgressBar extends LinearLayout {
 
 		public Builder setChart(ChartProgressBar chart) {
 			mChart = chart;
-			instance = chart;
 			return this;
 		}
 
@@ -185,17 +182,14 @@ public class ChartProgressBar extends LinearLayout {
 	}
 
 
-	public static void animateBars() {
+	public void animateBars() {
 
-		if (instance == null)
-			return;
-
-		final int childCount = instance.getChildCount();
+		final int childCount = this.getChildCount();
 		Handler handler = new Handler();
 
 		for (int i = 0; i < childCount; i++) {
 
-			LinearLayout barContainer = (LinearLayout) instance.getChildAt(i);
+			LinearLayout barContainer = (LinearLayout) this.getChildAt(i);
 			int contentCount = barContainer.getChildCount();
 
 			for (int j = 0; j < contentCount; j++) {
@@ -209,7 +203,7 @@ public class ChartProgressBar extends LinearLayout {
 					handler.postDelayed(new Runnable() {
 						@Override public void run() {
 							BarAnimation anim = new BarAnimation(bar, 0, bar.getProgress());
-							anim.setDuration(250);
+							anim.setDuration(700);
 							bar.startAnimation(anim);
 						}
 					}, 100 * i);

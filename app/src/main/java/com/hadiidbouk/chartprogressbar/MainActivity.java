@@ -2,6 +2,7 @@ package com.hadiidbouk.chartprogressbar;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.hadiidbouk.charts.BarData;
 import com.hadiidbouk.charts.ChartProgressBar;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+	private ChartProgressBar chart;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
 		dataList.add(data);
 
-		ChartProgressBar chart = (ChartProgressBar) findViewById(R.id.ProgressBarChart);
+		chart = (ChartProgressBar) findViewById(R.id.ProgressBarChart);
 
 		ChartProgressBar.Builder chartBuilder = new ChartProgressBar.Builder();
 		chartBuilder
@@ -69,5 +72,9 @@ public class MainActivity extends AppCompatActivity {
 			.build();
 
 
+	}
+
+	public void animate(View view) {
+		chart.animateBars();
 	}
 }

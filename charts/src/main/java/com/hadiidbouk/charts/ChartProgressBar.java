@@ -43,7 +43,6 @@ public class ChartProgressBar extends LinearLayout {
 	public static class Builder {
 
 		private ChartProgressBar mChart;
-		private ArrayList<BarData> mDataList;
 		private float mMaxValue;
 		private int mBarWidth;
 		private int mBarHeight;
@@ -63,8 +62,7 @@ public class ChartProgressBar extends LinearLayout {
 			return this;
 		}
 
-		private Builder setDataList(ArrayList<BarData> dataList) {
-			mDataList = dataList;
+		public Builder setDataList(ArrayList<BarData> dataList) {
 			setData(dataList);
 			return this;
 		}

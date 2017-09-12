@@ -230,35 +230,4 @@ public class ChartProgressBar extends LinearLayout {
 		}
 	}
 
-	public void animateBars() {
-
-		final int childCount = this.getChildCount();
-		Handler handler = new Handler();
-
-		for (int i = 0; i < childCount; i++) {
-
-			LinearLayout barContainer = (LinearLayout) this.getChildAt(i);
-			int contentCount = barContainer.getChildCount();
-
-			for (int j = 0; j < contentCount; j++) {
-
-				View view = barContainer.getChildAt(j);
-
-				if (view instanceof Bar) {
-
-					final Bar bar = (Bar) view;
-
-					handler.postDelayed(new Runnable() {
-						@Override public void run() {
-							BarAnimation anim = new BarAnimation(bar, 0, bar.getProgress());
-							anim.setDuration(700);
-							bar.startAnimation(anim);
-						}
-					}, 100 * i);
-				}
-			}
-
-		}
-	}
-
 }

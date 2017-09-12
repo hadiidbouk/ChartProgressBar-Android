@@ -191,7 +191,47 @@ public class ChartProgressBar extends LinearLayout {
 	public ArrayList<BarData> getData() {
 		return mDataList;
 	}
-	
+
+	public void removeBarValues() {
+
+		final int childCount = this.getChildCount();
+
+		for (int i = 0; i < childCount; i++) {
+
+			LinearLayout barContainer = (LinearLayout) this.getChildAt(i);
+			int contentCount = barContainer.getChildCount();
+
+			for (int j = 0; j < contentCount; j++) {
+
+				View view = barContainer.getChildAt(j);
+
+				if (view instanceof Bar) {
+					((Bar) view).setProgress(0);
+				}
+			}
+		}
+	}
+
+	public void resetBarValues() {
+
+		final int childCount = this.getChildCount();
+
+		for (int i = 0; i < childCount; i++) {
+
+			LinearLayout barContainer = (LinearLayout) this.getChildAt(i);
+			int contentCount = barContainer.getChildCount();
+
+			for (int j = 0; j < contentCount; j++) {
+
+				View view = barContainer.getChildAt(j);
+
+				if (view instanceof Bar) {
+					((Bar) view).setProgress((int) mDataList.get(i).getBarValue());
+				}
+			}
+		}
+	}
+
 	public void animateBars() {
 
 		final int childCount = this.getChildCount();

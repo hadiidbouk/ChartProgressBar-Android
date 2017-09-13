@@ -2,16 +2,20 @@ package com.hadiidbouk.charts;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ScaleDrawable;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -50,6 +54,9 @@ public class ChartProgressBar extends LinearLayout {
 		private int mProgressColor;
 		private int mBarRadius;
 		private Context mContext;
+		private int mPinTextColor;
+		private int mPinBackgroundColor;
+		private int mPinPadding;
 		private DisplayMetrics mMetrics;
 
 		public Builder setContext(Context context) {
@@ -78,6 +85,24 @@ public class ChartProgressBar extends LinearLayout {
 		}
 
 
+		public Builder setPinTextColor(int pinTextColor) {
+			mPinTextColor = pinTextColor;
+			return this;
+		}
+
+
+		public Builder setPinBackgroundColor(int pinBackgroundColor) {
+			mPinBackgroundColor = pinBackgroundColor;
+			return this;
+		}
+
+
+		public Builder setPinPadding(int pinPadding) {
+			mPinPadding = pinPadding;
+			return this;
+		}
+
+
 		public Builder setMaxValue(float maxValue) {
 			mMaxValue = maxValue;
 			return this;
@@ -100,25 +125,26 @@ public class ChartProgressBar extends LinearLayout {
 
 		public void build() {
 
-			mMetrics = Resources.getSystem().getDisplayMetrics();
-
 			mChart.removeAllViews();
 
+			mMetrics = Resources.getSystem().getDisplayMetrics();
+
+
 			for (BarData data : mDataList) {
-				LinearLayout bar = getBar(data.getBarTitle(), data.getBarValue());
+				FrameLayout bar = getBar(data.getBarTitle(), data.getBarValue(),data.getPinText());
 				mChart.addView(bar);
 			}
 		}
 
-		private LinearLayout getBar(final String title, final float value) {
+		private FrameLayout getBar(final String title, final float value, final String pinTxt) {
 
 			LinearLayout linearLayout = new LinearLayout(mContext);
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-				0,
-				LayoutParams.WRAP_CONTENT,
-				1f
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT
 			);
 
+			params.gravity = Gravity.CENTER;
 			linearLayout.setLayoutParams(params);
 			linearLayout.setOrientation(VERTICAL);
 			linearLayout.setGravity(Gravity.CENTER);
@@ -138,6 +164,7 @@ public class ChartProgressBar extends LinearLayout {
 				getDPI(mBarHeight)
 			);
 
+			progressParams.gravity = Gravity.CENTER;
 			bar.setLayoutParams(progressParams);
 
 			BarAnimation anim = new BarAnimation(bar, 0, value);
@@ -169,20 +196,129 @@ public class ChartProgressBar extends LinearLayout {
 				LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT
 			);
-			txtParams.setMargins(0,
-
-				getDPI(15), 0, 0);
+			txtParams.setMargins(0, getDPI(15), 0, 0);
 			txtBar.setTextSize(14);
 			txtBar.setText(title);
 			txtBar.setGravity(Gravity.CENTER);
 			linearLayout.addView(txtBar);
-			return linearLayout;
+
+			FrameLayout frameLayout = new FrameLayout(mContext);
+			LinearLayout.LayoutParams frameParams = new LinearLayout.LayoutParams(
+				0,
+				FrameLayout.LayoutParams.WRAP_CONTENT,
+				1f
+			);
+
+			frameParams.gravity = Gravity.CENTER;
+
+			frameLayout.setLayoutParams(frameParams);
+
+
+			//Adding bar + title
+			frameLayout.addView(linearLayout);
+
+			// Adding value Txt when click on a bar
+			TextView valueTxtView = new TextView(mContext);
+			FrameLayout.LayoutParams valueParams = new FrameLayout.LayoutParams(
+				ViewGroup.LayoutParams.WRAP_CONTENT,
+				ViewGroup.LayoutParams.WRAP_CONTENT
+			);
+
+			valueParams.gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
+			int valueInt = (int) value;
+			valueTxtView.setBackgroundResource(R.drawable.pin_shape);
+
+			int margin = (int) ((valueInt * mBarHeight) / mMaxValue) + 19;
+
+			valueParams.setMargins(0, 0, 0, getDPI(margin));
+			int padding = getDPI(3);
+			valueTxtView.setPadding(padding, padding, padding, padding * 2);
+			valueTxtView.setLayoutParams(valueParams);
+			valueTxtView.setText(pinTxt);
+			valueTxtView.setVisibility(INVISIBLE);
+
+
+			valueTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.white));
+			valueTxtView.setGravity(Gravity.CENTER);
+
+
+			if (mPinPadding != 0) {
+				int pinPadding = getDPI(mPinPadding);
+				valueTxtView.setPadding(pinPadding, pinPadding, pinPadding, pinPadding * 2);
+			}
+
+			int color = mPinTextColor;
+			if (color != 0)
+				valueTxtView.setTextColor(ContextCompat.getColor(mContext, color));
+
+			int backgroundColor = mPinBackgroundColor;
+			if (backgroundColor != 0) {
+
+				Drawable drawable = valueTxtView.getBackground();
+				PorterDuffColorFilter porterDuffColorFilter = new PorterDuffColorFilter(
+					ContextCompat.getColor(mContext, backgroundColor),
+					PorterDuff.Mode.SRC_ATOP
+				);
+
+				drawable.setColorFilter(porterDuffColorFilter);
+			}
+
+
+
+			frameLayout.addView(valueTxtView);
+
+			if(pinTxt != null )
+				frameLayout.setOnClickListener(barClickListener);
+
+
+			return frameLayout;
 		}
+
 
 		private int getDPI(int size) {
 			return (size * mMetrics.densityDpi) / DisplayMetrics.DENSITY_DEFAULT;
 		}
 
+		private FrameLayout.OnClickListener barClickListener = new FrameLayout.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				FrameLayout frameLayout = (FrameLayout) view;
+
+				int childCount = frameLayout.getChildCount();
+
+				for (int i = 0; i < childCount; i++) {
+
+					View childView = frameLayout.getChildAt(i);
+					if (childView instanceof LinearLayout) {
+
+						LinearLayout linearLayout = (LinearLayout) childView;
+						Bar bar = (Bar) linearLayout.getChildAt(0);
+						TextView titleTxtView = (TextView) linearLayout.getChildAt(1);
+
+						LayerDrawable layerDrawable = (LayerDrawable) bar.getProgressDrawable();
+						layerDrawable.mutate();
+
+						ScaleDrawable scaleDrawable = (ScaleDrawable) layerDrawable.getDrawable(1);
+
+						GradientDrawable progressLayer = (GradientDrawable) scaleDrawable.getDrawable();
+						assert progressLayer != null;
+						if(mPinBackgroundColor != 0) {
+							progressLayer.setColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
+							titleTxtView.setTextColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
+						}
+						else {
+							progressLayer.setColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
+							titleTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
+						}
+					} else {
+						TextView valueTxtView = (TextView) childView;
+						valueTxtView.setVisibility(VISIBLE);
+					}
+				}
+
+
+			}
+		};
 	}
 
 
@@ -229,5 +365,6 @@ public class ChartProgressBar extends LinearLayout {
 			}
 		}
 	}
+
 
 }

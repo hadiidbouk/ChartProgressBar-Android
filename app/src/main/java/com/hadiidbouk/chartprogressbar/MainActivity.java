@@ -2,7 +2,6 @@ package com.hadiidbouk.chartprogressbar;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.hadiidbouk.charts.BarData;
 import com.hadiidbouk.charts.ChartProgressBar;
@@ -20,40 +19,22 @@ public class MainActivity extends AppCompatActivity {
 
 		ArrayList<BarData> dataList = new ArrayList<>();
 
-		BarData data = new BarData();
-		data.setBarTitle("sep");
-		data.setBarValue(3.4f);
-
+		BarData data = new BarData("sep",3.4f, "3.4€");
 		dataList.add(data);
 
-		data = new BarData();
-		data.setBarTitle("oct");
-		data.setBarValue(8f);
-
+		data = new BarData("Oct",8f,"8€");
 		dataList.add(data);
 
-		data = new BarData();
-		data.setBarTitle("nov");
-		data.setBarValue(1.8f);
-
+		data = new BarData("Nov",1.8f,"1.8€");
 		dataList.add(data);
 
-		data = new BarData();
-		data.setBarTitle("dec");
-		data.setBarValue(7.3f);
-
+		data = new BarData("Dec",7.3f,"7.3€");
 		dataList.add(data);
 
-		data = new BarData();
-		data.setBarTitle("jan");
-		data.setBarValue(6.2f);
-
+		data = new BarData("Jan",6.2f,"6.2€");
 		dataList.add(data);
 
-		data = new BarData();
-		data.setBarTitle("feb");
-		data.setBarValue(3.3f);
-
+		data = new BarData("Feb",3.3f,"3.3€");
 		dataList.add(data);
 
 		chart = (ChartProgressBar) findViewById(R.id.ProgressBarChart);
@@ -67,14 +48,13 @@ public class MainActivity extends AppCompatActivity {
 			.setDataList(dataList)
 			.setMaxValue(10)
 			.setBarRadius(45)
+			.setPinTextColor(R.color.value_bar_text)
+			.setPinBackgroundColor(R.color.value_bar_background)
+			.setPinPadding(3)
 			.setEmptyBarColor(R.color.empty)
 			.setProgressBarColor(R.color.progress)
 			.build();
 
 
-	}
-
-	public void animate(View view) {
-		chart.animateBars();
 	}
 }

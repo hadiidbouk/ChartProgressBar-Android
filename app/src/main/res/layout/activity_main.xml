@@ -11,17 +11,6 @@
 	<com.hadiidbouk.charts.ChartProgressBar
 		android:id="@+id/ProgressBarChart"
 		android:layout_width="match_parent"
-		android:layout_height="200dp"
-		android:layout_centerInParent="true"
-		android:layout_marginEnd="30dp"
-		android:layout_marginStart="30dp"/>
-
-	<Button
-		android:onClick="animate"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/ProgressBarChart"
-		android:layout_centerInParent="true"
-		android:layout_marginTop="10dp"
-		android:text="animate"/>
+		android:layout_height="match_parent"
+		android:layout_centerInParent="true"/>
 </RelativeLayout>

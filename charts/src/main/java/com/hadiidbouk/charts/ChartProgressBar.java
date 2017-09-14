@@ -132,7 +132,7 @@ public class ChartProgressBar extends LinearLayout {
 
 
 			for (BarData data : mDataList) {
-				FrameLayout bar = getBar(data.getBarTitle(), data.getBarValue(),data.getPinText());
+				FrameLayout bar = getBar(data.getBarTitle(), data.getBarValue(), data.getPinText());
 				mChart.addView(bar);
 			}
 		}
@@ -265,10 +265,9 @@ public class ChartProgressBar extends LinearLayout {
 			}
 
 
-
 			rootFrameLayout.addView(pinTxtView);
 
-			if(pinTxt != null )
+			if (pinTxt != null)
 				rootFrameLayout.setOnClickListener(barClickListener);
 
 
@@ -286,10 +285,10 @@ public class ChartProgressBar extends LinearLayout {
 
 				FrameLayout frameLayout = (FrameLayout) view;
 
-				if(oldFrameLayout != null)
+				if (oldFrameLayout != null)
 					clickBarOff(oldFrameLayout);
 
-				if(oldFrameLayout != frameLayout)
+				if (oldFrameLayout != frameLayout)
 					clickBarOn(frameLayout);
 
 				oldFrameLayout = frameLayout;
@@ -316,11 +315,10 @@ public class ChartProgressBar extends LinearLayout {
 
 					GradientDrawable progressLayer = (GradientDrawable) scaleDrawable.getDrawable();
 					assert progressLayer != null;
-					if(mPinBackgroundColor != 0) {
+					if (mPinBackgroundColor != 0) {
 						progressLayer.setColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
 						titleTxtView.setTextColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
-					}
-					else {
+					} else {
 						progressLayer.setColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
 						titleTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
 					}
@@ -332,6 +330,7 @@ public class ChartProgressBar extends LinearLayout {
 
 
 		}
+
 		private void clickBarOff(FrameLayout frameLayout) {
 
 			int childCount = frameLayout.getChildCount();
@@ -363,53 +362,73 @@ public class ChartProgressBar extends LinearLayout {
 	}
 
 
-
-
-
 	public ArrayList<BarData> getData() {
 		return mDataList;
 	}
 
 	public void removeBarValues() {
 
-		final int childCount = this.getChildCount();
+		final int barsCount = this.getChildCount();
 
-		for (int i = 0; i < childCount; i++) {
+		for (int i = 0; i < barsCount; i++) {
 
-			LinearLayout barContainer = (LinearLayout) this.getChildAt(i);
-			int contentCount = barContainer.getChildCount();
+			FrameLayout rootFrame = (FrameLayout) this.getChildAt(i);
+			int rootChildCount = rootFrame.getChildCount();
 
-			for (int j = 0; j < contentCount; j++) {
+			for (int j = 0; j < rootChildCount; j++) {
 
-				View view = barContainer.getChildAt(j);
+				View childView = rootFrame.getChildAt(j);
 
-				if (view instanceof Bar) {
-					((Bar) view).setProgress(0);
+				if (childView instanceof LinearLayout) {
+					//bar
+					LinearLayout barContainerLinear = ((LinearLayout) childView);
+					int barContainerCount = barContainerLinear.getChildCount();
+
+					for (int k = 0; k < barContainerCount; k++) {
+
+						View view = barContainerLinear.getChildAt(j);
+
+						if (view instanceof Bar) {
+							((Bar) view).setProgress(0);
+						}
+					}
 				}
 			}
+
+
 		}
 	}
 
 	public void resetBarValues() {
+		final int barsCount = this.getChildCount();
 
-		final int childCount = this.getChildCount();
+		for (int i = 0; i < barsCount; i++) {
 
-		for (int i = 0; i < childCount; i++) {
+			FrameLayout rootFrame = (FrameLayout) this.getChildAt(i);
+			int rootChildCount = rootFrame.getChildCount();
 
-			LinearLayout barContainer = (LinearLayout) this.getChildAt(i);
-			int contentCount = barContainer.getChildCount();
+			for (int j = 0; j < rootChildCount; j++) {
 
-			for (int j = 0; j < contentCount; j++) {
+				View childView = rootFrame.getChildAt(j);
 
-				View view = barContainer.getChildAt(j);
+				if (childView instanceof LinearLayout) {
+					//bar
+					LinearLayout barContainerLinear = ((LinearLayout) childView);
+					int barContainerCount = barContainerLinear.getChildCount();
 
-				if (view instanceof Bar) {
-					((Bar) view).setProgress((int) mDataList.get(i).getBarValue());
+					for (int k = 0; k < barContainerCount; k++) {
+
+						View view = barContainerLinear.getChildAt(j);
+
+						if (view instanceof Bar) {
+							((Bar) view).setProgress((int) mDataList.get(i).getBarValue());
+
+						}
+					}
 				}
+
+
 			}
 		}
 	}
-
-
-	
 }

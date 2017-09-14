@@ -58,6 +58,7 @@ public class ChartProgressBar extends LinearLayout {
 		private int mPinBackgroundColor;
 		private int mPinPadding;
 		private DisplayMetrics mMetrics;
+		private FrameLayout oldFrameLayout;
 
 		public Builder setContext(Context context) {
 			mContext = context;
@@ -159,7 +160,7 @@ public class ChartProgressBar extends LinearLayout {
 
 			bar.setProgressDrawable(ContextCompat.getDrawable(mContext, R.drawable.progress_bar_shape));
 
-			LinearLayout.LayoutParams progressParams = new LinearLayout.LayoutParams(
+			LayoutParams progressParams = new LayoutParams(
 				getDPI(mBarWidth),
 				getDPI(mBarHeight)
 			);
@@ -192,7 +193,7 @@ public class ChartProgressBar extends LinearLayout {
 
 			//Adding txt below bar
 			TextView txtBar = new TextView(mContext);
-			LinearLayout.LayoutParams txtParams = new LinearLayout.LayoutParams(
+			LayoutParams txtParams = new LayoutParams(
 				LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT
 			);
@@ -202,23 +203,23 @@ public class ChartProgressBar extends LinearLayout {
 			txtBar.setGravity(Gravity.CENTER);
 			linearLayout.addView(txtBar);
 
-			FrameLayout frameLayout = new FrameLayout(mContext);
-			LinearLayout.LayoutParams frameParams = new LinearLayout.LayoutParams(
+			FrameLayout rootFrameLayout = new FrameLayout(mContext);
+			LayoutParams rootParams = new LayoutParams(
 				0,
-				FrameLayout.LayoutParams.WRAP_CONTENT,
+				LayoutParams.MATCH_PARENT,
 				1f
 			);
 
-			frameParams.gravity = Gravity.CENTER;
+			rootParams.gravity = Gravity.CENTER;
 
-			frameLayout.setLayoutParams(frameParams);
+			rootFrameLayout.setLayoutParams(rootParams);
 
 
 			//Adding bar + title
-			frameLayout.addView(linearLayout);
+			rootFrameLayout.addView(linearLayout);
 
 			// Adding value Txt when click on a bar
-			TextView valueTxtView = new TextView(mContext);
+			TextView pinTxtView = new TextView(mContext);
 			FrameLayout.LayoutParams valueParams = new FrameLayout.LayoutParams(
 				ViewGroup.LayoutParams.WRAP_CONTENT,
 				ViewGroup.LayoutParams.WRAP_CONTENT
@@ -226,35 +227,35 @@ public class ChartProgressBar extends LinearLayout {
 
 			valueParams.gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
 			int valueInt = (int) value;
-			valueTxtView.setBackgroundResource(R.drawable.pin_shape);
+			pinTxtView.setBackgroundResource(R.drawable.pin_shape);
 
 			int margin = (int) ((valueInt * mBarHeight) / mMaxValue) + 19;
 
 			valueParams.setMargins(0, 0, 0, getDPI(margin));
 			int padding = getDPI(3);
-			valueTxtView.setPadding(padding, padding, padding, padding * 2);
-			valueTxtView.setLayoutParams(valueParams);
-			valueTxtView.setText(pinTxt);
-			valueTxtView.setVisibility(INVISIBLE);
+			pinTxtView.setPadding(padding, padding, padding, padding * 2);
+			pinTxtView.setLayoutParams(valueParams);
+			pinTxtView.setText(pinTxt);
+			pinTxtView.setVisibility(INVISIBLE);
 
 
-			valueTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.white));
-			valueTxtView.setGravity(Gravity.CENTER);
+			pinTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.white));
+			pinTxtView.setGravity(Gravity.CENTER);
 
 
 			if (mPinPadding != 0) {
 				int pinPadding = getDPI(mPinPadding);
-				valueTxtView.setPadding(pinPadding, pinPadding, pinPadding, pinPadding * 2);
+				pinTxtView.setPadding(pinPadding, pinPadding, pinPadding, pinPadding * 2);
 			}
 
 			int color = mPinTextColor;
 			if (color != 0)
-				valueTxtView.setTextColor(ContextCompat.getColor(mContext, color));
+				pinTxtView.setTextColor(ContextCompat.getColor(mContext, color));
 
 			int backgroundColor = mPinBackgroundColor;
 			if (backgroundColor != 0) {
 
-				Drawable drawable = valueTxtView.getBackground();
+				Drawable drawable = pinTxtView.getBackground();
 				PorterDuffColorFilter porterDuffColorFilter = new PorterDuffColorFilter(
 					ContextCompat.getColor(mContext, backgroundColor),
 					PorterDuff.Mode.SRC_ATOP
@@ -265,13 +266,13 @@ public class ChartProgressBar extends LinearLayout {
 
 
 
-			frameLayout.addView(valueTxtView);
+			rootFrameLayout.addView(pinTxtView);
 
 			if(pinTxt != null )
-				frameLayout.setOnClickListener(barClickListener);
+				rootFrameLayout.setOnClickListener(barClickListener);
 
 
-			return frameLayout;
+			return rootFrameLayout;
 		}
 
 
@@ -282,44 +283,87 @@ public class ChartProgressBar extends LinearLayout {
 		private FrameLayout.OnClickListener barClickListener = new FrameLayout.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+
 				FrameLayout frameLayout = (FrameLayout) view;
 
-				int childCount = frameLayout.getChildCount();
+				if(oldFrameLayout != null)
+					clickBarOff(oldFrameLayout);
 
-				for (int i = 0; i < childCount; i++) {
+				if(oldFrameLayout != frameLayout)
+					clickBarOn(frameLayout);
 
-					View childView = frameLayout.getChildAt(i);
-					if (childView instanceof LinearLayout) {
-
-						LinearLayout linearLayout = (LinearLayout) childView;
-						Bar bar = (Bar) linearLayout.getChildAt(0);
-						TextView titleTxtView = (TextView) linearLayout.getChildAt(1);
-
-						LayerDrawable layerDrawable = (LayerDrawable) bar.getProgressDrawable();
-						layerDrawable.mutate();
-
-						ScaleDrawable scaleDrawable = (ScaleDrawable) layerDrawable.getDrawable(1);
-
-						GradientDrawable progressLayer = (GradientDrawable) scaleDrawable.getDrawable();
-						assert progressLayer != null;
-						if(mPinBackgroundColor != 0) {
-							progressLayer.setColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
-							titleTxtView.setTextColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
-						}
-						else {
-							progressLayer.setColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
-							titleTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
-						}
-					} else {
-						TextView valueTxtView = (TextView) childView;
-						valueTxtView.setVisibility(VISIBLE);
-					}
-				}
-
+				oldFrameLayout = frameLayout;
 
 			}
 		};
+
+		private void clickBarOn(FrameLayout frameLayout) {
+			int childCount = frameLayout.getChildCount();
+
+			for (int i = 0; i < childCount; i++) {
+
+				View childView = frameLayout.getChildAt(i);
+				if (childView instanceof LinearLayout) {
+
+					LinearLayout linearLayout = (LinearLayout) childView;
+					Bar bar = (Bar) linearLayout.getChildAt(0);
+					TextView titleTxtView = (TextView) linearLayout.getChildAt(1);
+
+					LayerDrawable layerDrawable = (LayerDrawable) bar.getProgressDrawable();
+					layerDrawable.mutate();
+
+					ScaleDrawable scaleDrawable = (ScaleDrawable) layerDrawable.getDrawable(1);
+
+					GradientDrawable progressLayer = (GradientDrawable) scaleDrawable.getDrawable();
+					assert progressLayer != null;
+					if(mPinBackgroundColor != 0) {
+						progressLayer.setColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
+						titleTxtView.setTextColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
+					}
+					else {
+						progressLayer.setColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
+						titleTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
+					}
+				} else {
+					TextView valueTxtView = (TextView) childView;
+					valueTxtView.setVisibility(VISIBLE);
+				}
+			}
+
+
+		}
+		private void clickBarOff(FrameLayout frameLayout) {
+
+			int childCount = frameLayout.getChildCount();
+
+			for (int i = 0; i < childCount; i++) {
+
+				View childView = frameLayout.getChildAt(i);
+				if (childView instanceof LinearLayout) {
+
+					LinearLayout linearLayout = (LinearLayout) childView;
+					Bar bar = (Bar) linearLayout.getChildAt(0);
+					TextView titleTxtView = (TextView) linearLayout.getChildAt(1);
+
+					LayerDrawable layerDrawable = (LayerDrawable) bar.getProgressDrawable();
+					layerDrawable.mutate();
+
+					ScaleDrawable scaleDrawable = (ScaleDrawable) layerDrawable.getDrawable(1);
+
+					GradientDrawable progressLayer = (GradientDrawable) scaleDrawable.getDrawable();
+					assert progressLayer != null;
+					progressLayer.setColor(ContextCompat.getColor(mContext, mProgressColor));
+					titleTxtView.setTextColor(ContextCompat.getColor(mContext, mProgressColor));
+				} else {
+					TextView valueTxtView = (TextView) childView;
+					valueTxtView.setVisibility(INVISIBLE);
+				}
+			}
+		}
 	}
+
+
+
 
 
 	public ArrayList<BarData> getData() {
@@ -367,4 +411,5 @@ public class ChartProgressBar extends LinearLayout {
 	}
 
 
+	
 }

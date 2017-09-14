@@ -7,5 +7,5 @@
 	<color name="empty">#ffc1c1</color>
 	<color name="progress">#8c9eff</color>
 	<color name="value_bar_background">#2c2c65</color>
-	<color name="value_bar_text">#FFF</color>
+	<color name="value_bar_text">#8c8c8c</color>
 </resources>

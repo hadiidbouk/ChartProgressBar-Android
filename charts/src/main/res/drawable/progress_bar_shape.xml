@@ -11,7 +11,7 @@
 	</item>
 	<item android:id="@android:id/progress">
 
-		<scale android:scaleWidth="98%">
+		<scale android:scaleWidth="100%">
 
 			<shape>
 

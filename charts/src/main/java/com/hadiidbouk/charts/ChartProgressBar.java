@@ -141,7 +141,7 @@ public class ChartProgressBar extends LinearLayout {
 
 			for (BarData data : mDataList) {
 
-				int value = (int) (data.getBarValue() * 1000);
+				int value = (int) (data.getBarValue() * 100);
 				FrameLayout bar = getBar(data.getBarTitle(), value, data.getPinText());
 				mChart.addView(bar);
 			}
@@ -149,7 +149,7 @@ public class ChartProgressBar extends LinearLayout {
 
 		private FrameLayout getBar(final String title, final int value, final String pinTxt) {
 
-			int maxValue = (int) (mMaxValue * 1000);
+			int maxValue = (int) (mMaxValue * 100);
 
 			LinearLayout linearLayout = new LinearLayout(mContext);
 			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(

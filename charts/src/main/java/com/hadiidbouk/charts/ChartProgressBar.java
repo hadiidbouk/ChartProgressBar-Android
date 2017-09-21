@@ -336,10 +336,10 @@ public class ChartProgressBar extends LinearLayout {
 					assert progressLayer != null;
 					if (mPinBackgroundColor != 0) {
 						progressLayer.setColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
-						titleTxtView.setTextColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
+						//titleTxtView.setTextColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
 					} else {
 						progressLayer.setColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
-						titleTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
+						//titleTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
 					}
 				} else {
 					TextView valueTxtView = (TextView) childView;

@@ -268,11 +268,9 @@ public class ChartProgressBar extends LinearLayout {
 
 			pinTxtView.setText(pinTxt);
 			pinTxtView.setVisibility(INVISIBLE);
-
+			pinTxtView.setMaxLines(1);
 
 			pinTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.white));
-			pinTxtView.setGravity(Gravity.CENTER);
-
 
 			int color = mPinTextColor;
 			if (color != 0)
@@ -342,7 +340,7 @@ public class ChartProgressBar extends LinearLayout {
 					GradientDrawable progressLayer = (GradientDrawable) scaleDrawable.getDrawable();
 					assert progressLayer != null;
 					if (mPinBackgroundColor != 0) {
-						progressLayer.setColor(ContextCompat.getColor(mContext, mProgressColor));
+						progressLayer.setColor(ContextCompat.getColor(mContext, mProgressClickColor));
 						titleTxtView.setTextColor(ContextCompat.getColor(mContext, mProgressClickColor));
 					} else {
 						progressLayer.setColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));

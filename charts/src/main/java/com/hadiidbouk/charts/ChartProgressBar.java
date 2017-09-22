@@ -54,6 +54,7 @@ public class ChartProgressBar extends LinearLayout {
 		private int mBarHeight;
 		private int mEmptyColor;
 		private int mProgressColor;
+		private int mProgressClickColor;
 		private int mBarRadius;
 		private Context mContext;
 		private int mPinTextColor;
@@ -100,6 +101,10 @@ public class ChartProgressBar extends LinearLayout {
 			return this;
 		}
 
+		public Builder setProgressClickColor(int color) {
+			mProgressClickColor = color;
+			return this;
+		}
 
 		public Builder setPinPadding(int pinPadding) {
 			mPinPadding = pinPadding;
@@ -213,6 +218,8 @@ public class ChartProgressBar extends LinearLayout {
 			txtBar.setTextSize(14);
 			txtBar.setText(title);
 			txtBar.setGravity(Gravity.CENTER);
+			txtBar.setTextColor(ContextCompat.getColor(mContext, mProgressColor));
+
 			linearLayout.addView(txtBar);
 
 			FrameLayout rootFrameLayout = new FrameLayout(mContext);
@@ -241,11 +248,11 @@ public class ChartProgressBar extends LinearLayout {
 			pinTxtView.setBackgroundResource(R.drawable.pin_shape);
 
 			int padding = getDPI(3);
-			pinTxtView.setPadding(padding, padding, padding, padding * 2);
+			pinTxtView.setPadding(padding *2, padding, padding *2, padding * 2);
 
 			if (mPinPadding != 0) {
 				int pinPadding = getDPI(mPinPadding);
-				pinTxtView.setPadding(pinPadding, pinPadding, pinPadding, pinPadding * 2);
+				pinTxtView.setPadding(pinPadding*2, pinPadding, pinPadding*2, pinPadding * 2);
 			}
 
 			Rect bounds = new Rect();
@@ -335,11 +342,11 @@ public class ChartProgressBar extends LinearLayout {
 					GradientDrawable progressLayer = (GradientDrawable) scaleDrawable.getDrawable();
 					assert progressLayer != null;
 					if (mPinBackgroundColor != 0) {
-						progressLayer.setColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
-						//titleTxtView.setTextColor(ContextCompat.getColor(mContext, mPinBackgroundColor));
+						progressLayer.setColor(ContextCompat.getColor(mContext, mProgressColor));
+						titleTxtView.setTextColor(ContextCompat.getColor(mContext, mProgressClickColor));
 					} else {
 						progressLayer.setColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
-						//titleTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
+						titleTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_green_dark));
 					}
 				} else {
 					TextView valueTxtView = (TextView) childView;

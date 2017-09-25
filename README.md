@@ -25,7 +25,7 @@ compile 'com.github.hadiidbouk:ChartProgressBar:1.0.0'
 
 ## Usage
 
-1. Add `CharProgressBar` to your layout :
+1. Add `ChartProgressBar` to your layout :
 
 ```
 <com.hadiidbouk.charts.ChartProgressBar

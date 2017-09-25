@@ -1,3 +1,7 @@
 <resources>
 	<string name="app_name">ChartProgressBar</string>
+
+	<string name="btn_clear">Clear</string>
+	<string name="btn_reset">Reset</string>
+	<string name="btn_clear_click">Clear Click</string>
 </resources>

@@ -4,8 +4,10 @@
 	<color name="colorPrimaryDark">#303F9F</color>
 	<color name="colorAccent">#FF4081</color>
 
-	<color name="empty">#ffc1c1</color>
-	<color name="progress">#8c9eff</color>
-	<color name="value_bar_background">#2c2c65</color>
-	<color name="value_bar_text">#8c8c8c</color>
+	<color name="empty">#cfd8dc</color>
+	<color name="progress">#00c853</color>
+	<color name="progress_click">#00ff6a</color>
+	<color name="pin_background">#4e4e4e</color>
+	<color name="pin_text">#ffffff</color>
+	<color name="bar_title_color">#a21</color>
 </resources>

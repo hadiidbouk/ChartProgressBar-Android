@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="empty">#ffc1c1</color>
+	<color name="progress">#8c9eff</color>
+	<color name="progress_click">#bbdefb</color>
+	<color name="pin_background">#2c2c65</color>
+	<color name="pin_text">#8c8c8c</color>
+	<color name="bar_title_color">#000000</color>
+</resources>

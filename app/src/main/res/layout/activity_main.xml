@@ -9,9 +9,53 @@
 
 
 	<com.hadiidbouk.charts.ChartProgressBar
-		android:id="@+id/ProgressBarChart"
+		android:id="@+id/ChartProgressBar"
 		android:layout_width="match_parent"
-		android:layout_height="250dp"
-		android:padding="30dp"
-		android:layout_centerInParent="true"/>
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:gravity="center"
+		app:hdBarCanBeClick="true"
+		app:hdBarHeight="170dp"
+		app:hdBarWidth="16dp"
+		app:hdBarRadius="10dp"
+		app:hdMaxValue="10"
+		app:hdEmptyColor="@color/empty"
+		app:hdProgressColor="@color/progress"
+		app:hdProgressClickColor="@color/progress_click"
+		app:hdPinBackgroundColor="@color/pin_background"
+		app:hdPinTextColor="@color/pin_text"
+		app:hdPinPadding="3dp"
+		app:hdBarTitleColor="@color/bar_title_color"
+		app:hdBarTitleTxtSize="12sp"
+		app:hdPinTxtSize="17sp"
+		app:hdPinMarginTop="10dp"
+		/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/ChartProgressBar"
+		android:layout_marginTop="20dp">
+		<Button
+			android:id="@+id/BtnClear"
+			android:onClick="BtnPressed"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/btn_clear"/>
+		<Button
+			android:id="@+id/BtnReset"
+			android:onClick="BtnPressed"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/btn_reset"/>
+		<Button
+			android:id="@+id/BtnClearClick"
+			android:onClick="BtnPressed"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/btn_clear_click"/>
+	</LinearLayout>
 </RelativeLayout>

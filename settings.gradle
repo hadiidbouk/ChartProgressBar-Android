@@ -1,1 +1,1 @@
-include ':app', ':charts'
+include ':sample', ':charts'

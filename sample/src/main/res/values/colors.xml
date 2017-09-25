@@ -5,8 +5,8 @@
 	<color name="colorAccent">#FF4081</color>
 
 	<color name="empty">#cfd8dc</color>
-	<color name="progress">#00c853</color>
-	<color name="progress_click">#00ff6a</color>
+	<color name="progress">#448aff</color>
+	<color name="progress_click">#737288</color>
 	<color name="pin_background">#4e4e4e</color>
 	<color name="pin_text">#ffffff</color>
 	<color name="bar_title_color">#a21</color>

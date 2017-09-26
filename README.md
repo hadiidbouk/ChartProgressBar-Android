@@ -89,3 +89,5 @@ compile 'com.github.hadiidbouk:ChartProgressBar:1.0.1'
 3. `mChart.removeClickedBar()` : Unselect the clicked bar.
 
 4. `isBarsEmpty()` : Check if bars values are empty.
+
+5. `setMaxValue(float maxValue)` : Setting bars max value programmatically .

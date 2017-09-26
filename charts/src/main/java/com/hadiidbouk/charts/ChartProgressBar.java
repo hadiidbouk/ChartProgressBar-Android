@@ -245,6 +245,9 @@ public class ChartProgressBar extends LinearLayout {
 		return rootFrameLayout;
 	}
 
+	public void setMaxValue(float mMaxValue) {
+		this.mMaxValue = mMaxValue;
+	}
 
 	private int getDPI(int size) {
 		return (size * mMetrics.densityDpi) / DisplayMetrics.DENSITY_DEFAULT;

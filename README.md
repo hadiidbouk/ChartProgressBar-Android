@@ -27,7 +27,7 @@ compile 'com.github.hadiidbouk:ChartProgressBar:1.0.1'
 
 1. Add `ChartProgressBar` to your layout :
 
-```
+```xml
 <com.hadiidbouk.charts.ChartProgressBar
 		android:id="@+id/ChartProgressBar"
 		android:layout_width="match_parent"
@@ -53,7 +53,7 @@ compile 'com.github.hadiidbouk:ChartProgressBar:1.0.1'
 
 2. Add your Data to the chart :
 
-```
+```java
 		ArrayList<BarData> dataList = new ArrayList<>();
 
 		BarData data = new BarData("Sep", 3.4f, "3.4€");

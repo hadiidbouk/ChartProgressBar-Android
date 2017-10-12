@@ -1,6 +1,6 @@
 # ChartProgressBar
 
-Draw a chart with progress bar style
+Draw a chart with progress bar style - the ios version [here](https://github.com/hadiidbouk/ChartProgressBar-iOS)
 
 ![](https://i.imgur.com/bcb3jti.png)
 

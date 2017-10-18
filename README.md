@@ -27,7 +27,6 @@ compile 'com.github.hadiidbouk:ChartProgressBar:1.0.2'
 
 1. Add `ChartProgressBar` to your layout :
 	
-Don't forget to add the namespace on the root tag ```xmlns:hd="http://schemas.android.com/apk/lib/com.hadiidbouk.charts"```
 ```xml
 <com.hadiidbouk.charts.ChartProgressBar
 		android:id="@+id/ChartProgressBar"

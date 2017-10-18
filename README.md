@@ -1,6 +1,6 @@
 # ChartProgressBar
 
-Draw a chart with progress bar style
+Draw a chart with progress bar style - the ios version [here](https://github.com/hadiidbouk/ChartProgressBar-iOS)
 
 ![](https://i.imgur.com/bcb3jti.png)
 
@@ -20,14 +20,14 @@ allprojects {
 Add the dependency to your build.gradle (app) :
 
 ```
-compile 'com.github.hadiidbouk:ChartProgressBar:1.0.0'
+compile 'com.github.hadiidbouk:ChartProgressBar:1.0.2'
 ```
 
 ## Usage
 
 1. Add `ChartProgressBar` to your layout :
-
-```
+	
+```xml
 <com.hadiidbouk.charts.ChartProgressBar
 		android:id="@+id/ChartProgressBar"
 		android:layout_width="match_parent"
@@ -53,7 +53,7 @@ compile 'com.github.hadiidbouk:ChartProgressBar:1.0.0'
 
 2. Add your Data to the chart :
 
-```
+```java
 		ArrayList<BarData> dataList = new ArrayList<>();
 
 		BarData data = new BarData("Sep", 3.4f, "3.4€");
@@ -89,3 +89,5 @@ compile 'com.github.hadiidbouk:ChartProgressBar:1.0.0'
 3. `mChart.removeClickedBar()` : Unselect the clicked bar.
 
 4. `isBarsEmpty()` : Check if bars values are empty.
+
+5. `setMaxValue(float maxValue)` : Setting bars max value programmatically .

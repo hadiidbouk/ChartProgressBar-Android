@@ -27,7 +27,7 @@ compile 'com.github.hadiidbouk:ChartProgressBar:1.0.1'
 
 1. Add `ChartProgressBar` to your layout :
 	
-Don't forget to add the namespace on the root tag ```xmlns:app="http://schemas.android.com/apk/lib/com.hadiidbouk.charts"```
+Don't forget to add the namespace on the root tag ```xmlns:hd="http://schemas.android.com/apk/lib/com.hadiidbouk.charts"```
 ```xml
 <com.hadiidbouk.charts.ChartProgressBar
 		android:id="@+id/ChartProgressBar"
@@ -35,21 +35,21 @@ Don't forget to add the namespace on the root tag ```xmlns:app="http://schemas.a
 		android:layout_height="wrap_content"
 		android:layout_centerInParent="true"
 		android:gravity="center"
-		app:hdBarCanBeClick="true"
-		app:hdBarHeight="170dp"
-		app:hdBarWidth="16dp"
-		app:hdBarRadius="10dp"
-		app:hdMaxValue="10"
-		app:hdEmptyColor="@color/empty"
-		app:hdProgressColor="@color/progress"
-		app:hdProgressClickColor="@color/progress_click"
-		app:hdPinBackgroundColor="@color/pin_background"
-		app:hdPinTextColor="@color/pin_text"
-		app:hdPinPadding="3dp"
-		app:hdBarTitleColor="@color/bar_title_color"
-		app:hdBarTitleTxtSize="12sp"
-		app:hdPinTxtSize="17sp"
-		app:hdPinMarginTop="10dp"/>
+		hd:hdBarCanBeClick="true"
+		hd:hdBarHeight="170dp"
+		hd:hdBarWidth="16dp"
+		hd:hdBarRadius="10dp"
+		hd:hdMaxValue="10"
+		hd:hdEmptyColor="@color/empty"
+		hd:hdProgressColor="@color/progress"
+		hd:hdProgressClickColor="@color/progress_click"
+		hd:hdPinBackgroundColor="@color/pin_background"
+		hd:hdPinTextColor="@color/pin_text"
+		hd:hdPinPadding="3dp"
+		hd:hdBarTitleColor="@color/bar_title_color"
+		hd:hdBarTitleTxtSize="12sp"
+		hd:hdPinTxtSize="17sp"
+		hd:hdPinMarginTop="10dp"/>
 ```
 
 2. Add your Data to the chart :

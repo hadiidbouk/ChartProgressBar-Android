@@ -91,6 +91,9 @@ public class ChartProgressBar extends LinearLayout {
 
 
 	public void build() {
+
+		removeAllViews();
+
 		for (BarData data : mDataList) {
 			int barValue = (int) (data.getBarValue() * 100);
 			FrameLayout bar = getBar(data.getBarTitle(), barValue, data.getPinText());

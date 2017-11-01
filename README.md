@@ -20,7 +20,7 @@ allprojects {
 Add the dependency to your build.gradle (app) :
 
 ```
-compile 'com.github.hadiidbouk:ChartProgressBar:1.0.3'
+compile 'com.github.hadiidbouk:ChartProgressBar-Android:1.0.3'
 ```
 
 ## Usage

@@ -116,7 +116,7 @@ public class ChartProgressBar extends FrameLayout {
 	}
 
 
-	public void setOnBarClickedListener(OnBarClickedListener listener){
+	public void setOnBarClickedListener(OnBarClickedListener listener) {
 		this.listener = listener;
 	}
 
@@ -386,7 +386,8 @@ public class ChartProgressBar extends FrameLayout {
 
 			oldFrameLayout = frameLayout;
 
-			listener.onBarClicked((int)frameLayout.getTag());
+			if (listener != null)
+				listener.onBarClicked((int) frameLayout.getTag());
 
 		}
 	};

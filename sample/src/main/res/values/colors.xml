@@ -5,7 +5,8 @@
 	<color name="colorAccent">#FF4081</color>
 
 	<color name="empty">@android:color/transparent</color>
-	<color name="progress">#B6BDD5</color>
+	<color name="progress">#99ffffff</color>
+	<color name="progress_disable">#4bffffff</color>
 	<color name="progress_click">#F2912C</color>
 	<color name="pin_background">#E2335E</color>
 	<color name="pin_text">#ffffff</color>

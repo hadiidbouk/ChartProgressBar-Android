@@ -34,6 +34,7 @@
 		app:hdPinMarginEnd="22dp"
 		app:hdBarTitleMarginTop="9dp"
 		app:hdPinDrawable="@drawable/ic_pin"
+		app:hdProgressDisableColor="@color/progress_disable"
 		app:hdBarTitleSelectedColor="@color/bar_title_selected_color"/>
 
 	<LinearLayout

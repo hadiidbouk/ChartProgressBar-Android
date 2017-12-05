@@ -7,4 +7,5 @@
 	<color name="pin_text">#8c8c8c</color>
 	<color name="bar_title_color">#000000</color>
 	<color name="bar_title_txt_selected_color">#eaa</color>
+	<color name="progress_disable">@android:color/darker_gray</color>
 </resources>

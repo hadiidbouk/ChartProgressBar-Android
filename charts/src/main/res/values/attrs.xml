@@ -6,6 +6,7 @@
 		<attr name="hdBarHeight" format="dimension"/>
 		<attr name="hdEmptyColor" format="color"/>
 		<attr name="hdProgressColor" format="color"/>
+		<attr name="hdProgressDisableColor" format="color"/>
 		<attr name="hdProgressClickColor" format="color"/>
 		<attr name="hdBarRadius" format="dimension"/>
 		<attr name="hdPinTextColor" format="color"/>

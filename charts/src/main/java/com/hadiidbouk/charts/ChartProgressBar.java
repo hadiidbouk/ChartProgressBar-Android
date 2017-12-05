@@ -61,6 +61,7 @@ public class ChartProgressBar extends FrameLayout {
 	private ArrayList<TextView> pins = new ArrayList<>();
 	private int mBarTitleMarginTop;
 	private int mBarTitleSelectedColor;
+	private int mProgressDisableColor;
 
 	public ChartProgressBar(Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
@@ -86,6 +87,7 @@ public class ChartProgressBar extends FrameLayout {
 		mEmptyColor = typedArray.getResourceId(R.styleable.ChartProgressBar_hdEmptyColor, ContextCompat.getColor(mContext, R.color.empty));
 		mProgressColor = typedArray.getResourceId(R.styleable.ChartProgressBar_hdProgressColor, ContextCompat.getColor(mContext, R.color.progress));
 		mProgressClickColor = typedArray.getResourceId(R.styleable.ChartProgressBar_hdProgressClickColor, ContextCompat.getColor(mContext, R.color.progress_click));
+		mProgressDisableColor = typedArray.getResourceId(R.styleable.ChartProgressBar_hdProgressDisableColor, ContextCompat.getColor(mContext, android.R.color.darker_gray));
 		mBarTitleSelectedColor = typedArray.getResourceId(R.styleable.ChartProgressBar_hdBarTitleSelectedColor, ContextCompat.getColor(mContext, R.color.progress_click));
 		mPinTextColor = typedArray.getResourceId(R.styleable.ChartProgressBar_hdPinTextColor, ContextCompat.getColor(mContext, R.color.pin_text));
 		mPinBackgroundColor = typedArray.getResourceId(R.styleable.ChartProgressBar_hdPinBackgroundColor, ContextCompat.getColor(mContext, R.color.pin_background));
@@ -424,8 +426,6 @@ public class ChartProgressBar extends FrameLayout {
 
 			}
 		}
-
-
 	}
 
 	private void clickBarOff(FrameLayout frameLayout) {
@@ -488,7 +488,7 @@ public class ChartProgressBar extends FrameLayout {
 
 					for (int k = 0; k < barContainerCount; k++) {
 
-						View view = barContainerLinear.getChildAt(j);
+						View view = barContainerLinear.getChildAt(k);
 
 						if (view instanceof Bar) {
 							BarAnimation anim = new BarAnimation(((Bar) view), (int) (mDataList.get(i).getBarValue() * 100), 0);
@@ -533,7 +533,7 @@ public class ChartProgressBar extends FrameLayout {
 
 					for (int k = 0; k < barContainerCount; k++) {
 
-						View view = barContainerLinear.getChildAt(j);
+						View view = barContainerLinear.getChildAt(k);
 
 						if (view instanceof Bar) {
 							BarAnimation anim = new BarAnimation(((Bar) view), 0, (int) (mDataList.get(i).getBarValue() * 100));
@@ -549,5 +549,122 @@ public class ChartProgressBar extends FrameLayout {
 		isBarsEmpty = false;
 	}
 
+	public void disableBar(int index) {
 
+		final int barsCount = ((LinearLayout) this.getChildAt(0)).getChildCount();
+
+		for (int i = 0; i < barsCount; i++) {
+
+			FrameLayout rootFrame = (FrameLayout) ((LinearLayout) this.getChildAt(0)).getChildAt(i);
+
+			int rootChildCount = rootFrame.getChildCount();
+
+			for (int j = 0; j < rootChildCount; j++) {
+
+				if ((int) rootFrame.getTag() != index)
+					continue;
+
+				rootFrame.setEnabled(false);
+				rootFrame.setClickable(false);
+
+				View childView = rootFrame.getChildAt(j);
+				if (childView instanceof LinearLayout) {
+					//bar
+					LinearLayout barContainerLinear = ((LinearLayout) childView);
+					int barContainerCount = barContainerLinear.getChildCount();
+
+					for (int k = 0; k < barContainerCount; k++) {
+
+						View view = barContainerLinear.getChildAt(k);
+
+						if (view instanceof Bar) {
+
+							Bar bar = (Bar) view;
+
+							LayerDrawable layerDrawable = (LayerDrawable) bar.getProgressDrawable();
+							layerDrawable.mutate();
+
+							ScaleDrawable scaleDrawable = (ScaleDrawable) layerDrawable.getDrawable(1);
+
+							GradientDrawable progressLayer = (GradientDrawable) scaleDrawable.getDrawable();
+
+							if (progressLayer != null) {
+
+								if (mProgressDisableColor > 0)
+									progressLayer.setColor(ContextCompat.getColor(mContext, mProgressDisableColor));
+								else
+									progressLayer.setColor(ContextCompat.getColor(mContext, android.R.color.darker_gray));
+							}
+						} else {
+							TextView titleTxtView = (TextView) view;
+							if (mProgressDisableColor > 0)
+								titleTxtView.setTextColor(ContextCompat.getColor(mContext, mProgressDisableColor));
+							else
+								titleTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.darker_gray));
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	public void enableBar(int index) {
+
+		final int barsCount = ((LinearLayout) this.getChildAt(0)).getChildCount();
+
+		for (int i = 0; i < barsCount; i++) {
+
+			FrameLayout rootFrame = (FrameLayout) ((LinearLayout) this.getChildAt(0)).getChildAt(i);
+
+			int rootChildCount = rootFrame.getChildCount();
+
+			for (int j = 0; j < rootChildCount; j++) {
+
+				if ((int) rootFrame.getTag() != index)
+					continue;
+
+				rootFrame.setEnabled(true);
+				rootFrame.setClickable(true);
+
+				View childView = rootFrame.getChildAt(j);
+				if (childView instanceof LinearLayout) {
+					//bar
+					LinearLayout barContainerLinear = ((LinearLayout) childView);
+					int barContainerCount = barContainerLinear.getChildCount();
+
+					for (int k = 0; k < barContainerCount; k++) {
+
+						View view = barContainerLinear.getChildAt(k);
+
+						if (view instanceof Bar) {
+
+							Bar bar = (Bar) view;
+
+							LayerDrawable layerDrawable = (LayerDrawable) bar.getProgressDrawable();
+							layerDrawable.mutate();
+
+							ScaleDrawable scaleDrawable = (ScaleDrawable) layerDrawable.getDrawable(1);
+
+							GradientDrawable progressLayer = (GradientDrawable) scaleDrawable.getDrawable();
+
+							if (progressLayer != null) {
+
+								if (mProgressColor > 0)
+									progressLayer.setColor(ContextCompat.getColor(mContext, mProgressColor));
+								else
+									progressLayer.setColor(ContextCompat.getColor(mContext, android.R.color.darker_gray));
+							}
+						} else {
+							TextView titleTxtView = (TextView) view;
+							if (mProgressDisableColor > 0)
+								titleTxtView.setTextColor(ContextCompat.getColor(mContext, mBarTitleColor));
+							else
+								titleTxtView.setTextColor(ContextCompat.getColor(mContext, android.R.color.darker_gray));
+						}
+					}
+				}
+			}
+		}
+	}
 }

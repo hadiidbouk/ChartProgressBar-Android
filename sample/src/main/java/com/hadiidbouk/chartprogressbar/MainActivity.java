@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
 		mChart.setDataList(dataList);
 		mChart.build();
+
+		mChart.disableBar(dataList.size() - 1);
 	}
 
 	public void BtnPressed(View view) {

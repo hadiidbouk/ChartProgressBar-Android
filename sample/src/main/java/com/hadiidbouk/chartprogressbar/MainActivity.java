@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 		BarData data = new BarData("Sep", 3.4f, "3.4€");
 		dataList.add(data);
 
-		data = new BarData("Oct", 8f, "8€");
+		data = new BarData("Oct", 8.0f, "8.0€");
 		dataList.add(data);
 
 		data = new BarData("Nov", 1.8f, "1.8€");

@@ -10,11 +10,20 @@
 		<attr name="hdBarRadius" format="dimension"/>
 		<attr name="hdPinTextColor" format="color"/>
 		<attr name="hdPinBackgroundColor" format="color"/>
-		<attr name="hdPinPadding" format="dimension"/>
+		<attr name="hdPinPaddingTop" format="dimension"/>
+		<attr name="hdPinPaddingBottom" format="dimension"/>
+		<attr name="hdPinPaddingEnd" format="dimension"/>
+		<attr name="hdPinPaddingStart" format="dimension"/>
 		<attr name="hdBarCanBeClick" format="boolean"/>
 		<attr name="hdBarTitleColor" format="color"/>
+		<attr name="hdBarTitleMarginTop" format="dimension"/>
 		<attr name="hdBarTitleTxtSize" format="dimension"/>
 		<attr name="hdPinTxtSize" format="dimension"/>
 		<attr name="hdPinMarginTop" format="dimension"/>
+		<attr name="hdPinMarginBottom" format="dimension"/>
+		<attr name="hdPinMarginEnd" format="dimension"/>
+		<attr name="hdPinMarginStart" format="dimension"/>
+		<attr name="hdPinDrawable" format="integer"/>
+		<attr name="hdBarTitleSelectedColor" format="color"/>
 	</declare-styleable>
 </resources>

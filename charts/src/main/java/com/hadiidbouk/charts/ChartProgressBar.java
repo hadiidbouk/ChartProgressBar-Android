@@ -470,11 +470,11 @@ public class ChartProgressBar extends FrameLayout {
 		if (oldFrameLayout != null)
 			removeClickedBar();
 
-		final int barsCount = this.getChildCount();
+		final int barsCount = ((LinearLayout) this.getChildAt(0)).getChildCount();
 
 		for (int i = 0; i < barsCount; i++) {
 
-			FrameLayout rootFrame = (FrameLayout) this.getChildAt(i);
+			FrameLayout rootFrame = (FrameLayout) ((LinearLayout) this.getChildAt(0)).getChildAt(i);
 			int rootChildCount = rootFrame.getChildCount();
 
 			for (int j = 0; j < rootChildCount; j++) {
@@ -491,7 +491,9 @@ public class ChartProgressBar extends FrameLayout {
 						View view = barContainerLinear.getChildAt(j);
 
 						if (view instanceof Bar) {
-							((Bar) view).setProgress(0);
+							BarAnimation anim = new BarAnimation(((Bar) view), (int) (mDataList.get(i).getBarValue() * 100), 0);
+							anim.setDuration(250);
+							((Bar) view).startAnimation(anim);
 						}
 					}
 				}
@@ -513,11 +515,11 @@ public class ChartProgressBar extends FrameLayout {
 		if (oldFrameLayout != null)
 			removeClickedBar();
 
-		final int barsCount = this.getChildCount();
+		final int barsCount = ((LinearLayout) this.getChildAt(0)).getChildCount();
 
 		for (int i = 0; i < barsCount; i++) {
 
-			FrameLayout rootFrame = (FrameLayout) this.getChildAt(i);
+			FrameLayout rootFrame = (FrameLayout) ((LinearLayout) this.getChildAt(0)).getChildAt(i);
 			int rootChildCount = rootFrame.getChildCount();
 
 			for (int j = 0; j < rootChildCount; j++) {
@@ -534,8 +536,9 @@ public class ChartProgressBar extends FrameLayout {
 						View view = barContainerLinear.getChildAt(j);
 
 						if (view instanceof Bar) {
-							((Bar) view).setProgress((int) (mDataList.get(i).getBarValue() * 100));
-
+							BarAnimation anim = new BarAnimation(((Bar) view), 0, (int) (mDataList.get(i).getBarValue() * 100));
+							anim.setDuration(250);
+							((Bar) view).startAnimation(anim);
 						}
 					}
 				}

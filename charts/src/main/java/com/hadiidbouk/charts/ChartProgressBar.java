@@ -62,6 +62,7 @@ public class ChartProgressBar extends FrameLayout {
 	private int mBarTitleMarginTop;
 	private int mBarTitleSelectedColor;
 	private int mProgressDisableColor;
+	private OnBarClickedListener listener;
 
 	public ChartProgressBar(Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
@@ -114,6 +115,10 @@ public class ChartProgressBar extends FrameLayout {
 		mDataList = dataList;
 	}
 
+
+	public void setOnBarClickedListener(OnBarClickedListener listener){
+		this.listener = listener;
+	}
 
 	public void build() {
 
@@ -380,6 +385,8 @@ public class ChartProgressBar extends FrameLayout {
 
 
 			oldFrameLayout = frameLayout;
+
+			listener.onBarClicked((int)frameLayout.getTag());
 
 		}
 	};

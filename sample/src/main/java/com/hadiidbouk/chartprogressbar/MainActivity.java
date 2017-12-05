@@ -3,13 +3,15 @@ package com.hadiidbouk.chartprogressbar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.hadiidbouk.charts.BarData;
 import com.hadiidbouk.charts.ChartProgressBar;
+import com.hadiidbouk.charts.OnBarClickedListener;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnBarClickedListener {
 
 	private ChartProgressBar mChart;
 
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 		mChart.setDataList(dataList);
 		mChart.build();
-
+		mChart.setOnBarClickedListener(this);
 		mChart.disableBar(dataList.size() - 1);
 	}
 
@@ -59,5 +61,9 @@ public class MainActivity extends AppCompatActivity {
 				mChart.removeClickedBar();
 				break;
 		}
+	}
+
+	@Override public void onBarClicked(int index) {
+		Toast.makeText(this, String.valueOf(index), Toast.LENGTH_SHORT).show();
 	}
 }

@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ChartProgressBar.iml" filepath="$PROJECT_DIR$/ChartProgressBar.iml" />
+      <module fileurl="file://C:\My Projects\ChartProgressBar-Android\ChartProgressBar.iml" filepath="C:\My Projects\ChartProgressBar-Android\ChartProgressBar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ChartProgressBar-Android.iml" filepath="$PROJECT_DIR$/ChartProgressBar-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/charts/charts.iml" filepath="$PROJECT_DIR$/charts/charts.iml" />
+      <module fileurl="file://C:\My Projects\ChartProgressBar-Android\charts\charts.iml" filepath="C:\My Projects\ChartProgressBar-Android\charts\charts.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
+      <module fileurl="file://C:\My Projects\ChartProgressBar-Android\sample\sample.iml" filepath="C:\My Projects\ChartProgressBar-Android\sample\sample.iml" />
     </modules>
   </component>
 </project>

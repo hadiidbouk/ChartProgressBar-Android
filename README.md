@@ -2,7 +2,10 @@
 
 Draw a chart with progress bar style - the ios version [here](https://github.com/hadiidbouk/ChartProgressBar-iOS)
 
+![](https://i.imgur.com/bMB49fa.png)
+
 ![](https://i.imgur.com/bcb3jti.png)
+
 
 ## Installation
 
@@ -20,7 +23,7 @@ allprojects {
 Add the dependency to your build.gradle (app) :
 
 ```
-compile 'com.github.hadiidbouk:ChartProgressBar-Android:1.0.3'
+ compile 'com.github.hadiidbouk:ChartProgressBar-Android:2.0.0'
 ```
 
 ## Usage
@@ -36,7 +39,7 @@ compile 'com.github.hadiidbouk:ChartProgressBar-Android:1.0.3'
 		android:gravity="center"
 		app:hdBarCanBeClick="true"
 		app:hdBarHeight="170dp"
-		app:hdBarWidth="16dp"
+		app:hdBarWidth="7dp"
 		app:hdBarRadius="10dp"
 		app:hdMaxValue="10"
 		app:hdEmptyColor="@color/empty"
@@ -44,11 +47,17 @@ compile 'com.github.hadiidbouk:ChartProgressBar-Android:1.0.3'
 		app:hdProgressClickColor="@color/progress_click"
 		app:hdPinBackgroundColor="@color/pin_background"
 		app:hdPinTextColor="@color/pin_text"
-		app:hdPinPadding="3dp"
+		app:hdPinPaddingBottom="5dp"
 		app:hdBarTitleColor="@color/bar_title_color"
 		app:hdBarTitleTxtSize="12sp"
 		app:hdPinTxtSize="17sp"
-		app:hdPinMarginTop="10dp"/>
+		app:hdPinMarginTop="10dp"
+		app:hdPinMarginBottom="55dp"
+		app:hdPinMarginEnd="22dp"
+		app:hdBarTitleMarginTop="9dp"
+		app:hdPinDrawable="@drawable/ic_pin"
+		app:hdProgressDisableColor="@color/progress_disable"
+		app:hdBarTitleSelectedColor="@color/bar_title_selected_color"/>
 ```
 
 2. Add your Data to the chart :
@@ -91,3 +100,9 @@ compile 'com.github.hadiidbouk:ChartProgressBar-Android:1.0.3'
 4. `isBarsEmpty()` : Check if bars values are empty.
 
 5. `setMaxValue(float maxValue)` : Setting bars max value programmatically .
+
+6. ` enableBar(int index)` : Enable a bar
+
+7. `disableBar(int index)` : Disable a bar
+
+8. `setOnBarClickedListener(OnBarClickedListener listener)` : listening for click bar event

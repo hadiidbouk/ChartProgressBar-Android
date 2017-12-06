@@ -4,15 +4,12 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ScaleDrawable;
 import android.os.Build;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -24,7 +21,6 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -129,6 +125,11 @@ public class ChartProgressBar extends FrameLayout {
 			LayoutParams.MATCH_PARENT,
 			LayoutParams.MATCH_PARENT
 		);
+
+		Drawable d = getResources().getDrawable(mPinDrawable);
+		int h = d.getIntrinsicHeight();
+
+		linearLayout.setPadding(0, h * 2, 0, 0);
 		linearLayout.setLayoutParams(params);
 
 		addView(linearLayout);
@@ -204,9 +205,11 @@ public class ChartProgressBar extends FrameLayout {
 		emptyLayer.setCornerRadius(mBarRadius);
 
 		GradientDrawable progressLayer = (GradientDrawable) scaleDrawable.getDrawable();
-		assert progressLayer != null;
-		progressLayer.setColor(ContextCompat.getColor(mContext, mProgressColor));
-		progressLayer.setCornerRadius(mBarRadius);
+
+		if (progressLayer != null) {
+			progressLayer.setColor(ContextCompat.getColor(mContext, mProgressColor));
+			progressLayer.setCornerRadius(mBarRadius);
+		}
 
 
 		linearLayout.addView(bar);
@@ -237,8 +240,8 @@ public class ChartProgressBar extends FrameLayout {
 
 		rootParams.gravity = Gravity.CENTER;
 
-		int moreSpace = mPinMarginTop > mPinMarginBottom ? mPinMarginTop : mPinMarginBottom;
-		rootParams.setMargins(0, moreSpace, 0, moreSpace);
+
+		//rootParams.setMargins(0, h, 0, h);
 		rootFrameLayout.setLayoutParams(rootParams);
 
 

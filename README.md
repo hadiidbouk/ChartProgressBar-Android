@@ -23,7 +23,7 @@ allprojects {
 Add the dependency to your build.gradle (app) :
 
 ```
- compile 'com.github.hadiidbouk:ChartProgressBar-Android:2.0.1'
+ compile 'com.github.hadiidbouk:ChartProgressBar-Android:2.0.4'
 ```
 
 ## Usage
@@ -106,3 +106,7 @@ Add the dependency to your build.gradle (app) :
 7. `disableBar(int index)` : Disable a bar
 
 8. `setOnBarClickedListener(OnBarClickedListener listener)` : listening for click bar event
+
+9. `selectBar(int index)` : to select a bar like a click
+
+10. `deselectBar(int index)` : to deselect a bar

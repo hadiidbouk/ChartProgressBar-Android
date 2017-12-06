@@ -26,5 +26,6 @@
 		<attr name="hdPinMarginStart" format="dimension"/>
 		<attr name="hdPinDrawable" format="integer"/>
 		<attr name="hdBarTitleSelectedColor" format="color"/>
+		<attr name="hdBarCanBeToggle" format="boolean"/>
 	</declare-styleable>
 </resources>

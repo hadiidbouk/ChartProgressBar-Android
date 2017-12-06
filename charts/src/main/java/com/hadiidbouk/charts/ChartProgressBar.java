@@ -59,6 +59,7 @@ public class ChartProgressBar extends FrameLayout {
 	private int mBarTitleSelectedColor;
 	private int mProgressDisableColor;
 	private OnBarClickedListener listener;
+	private boolean mBarCanBeToggle;
 
 	public ChartProgressBar(Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
@@ -103,6 +104,7 @@ public class ChartProgressBar extends FrameLayout {
 		mPinMarginStart = typedArray.getDimensionPixelSize(R.styleable.ChartProgressBar_hdPinMarginStart, 0);
 		mBarTitleMarginTop = typedArray.getDimensionPixelSize(R.styleable.ChartProgressBar_hdBarTitleMarginTop, 0);
 		mPinDrawable = typedArray.getResourceId(R.styleable.ChartProgressBar_hdPinDrawable, 0);
+		mBarCanBeToggle = typedArray.getBoolean(R.styleable.ChartProgressBar_hdBarCanBeToggle, false);
 		typedArray.recycle();
 	}
 
@@ -376,7 +378,8 @@ public class ChartProgressBar extends FrameLayout {
 
 			FrameLayout frameLayout = (FrameLayout) view;
 
-			if (oldFrameLayout == frameLayout) {
+
+			if (oldFrameLayout == frameLayout && mBarCanBeToggle) {
 				if (isOldBarClicked)
 					clickBarOff(frameLayout);
 				else

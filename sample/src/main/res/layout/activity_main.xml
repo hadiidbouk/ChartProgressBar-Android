@@ -34,7 +34,8 @@
 		app:hdBarTitleMarginTop="9dp"
 		app:hdPinDrawable="@drawable/ic_pin"
 		app:hdProgressDisableColor="@color/progress_disable"
-		app:hdBarTitleSelectedColor="@color/bar_title_selected_color"/>
+		app:hdBarTitleSelectedColor="@color/bar_title_selected_color"
+		app:hdBarCanBeToggle="true"/>
 
 	<LinearLayout
 		android:layout_width="match_parent"

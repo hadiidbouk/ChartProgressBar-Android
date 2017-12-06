@@ -129,7 +129,7 @@ public class ChartProgressBar extends FrameLayout {
 		Drawable d = getResources().getDrawable(mPinDrawable);
 		int h = d.getIntrinsicHeight();
 
-		linearLayout.setPadding(0, h * 2, 0, 0);
+		linearLayout.setPadding(0, h + mPinMarginBottom/2, 0, 0);
 		linearLayout.setLayoutParams(params);
 
 		addView(linearLayout);

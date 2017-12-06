@@ -129,7 +129,7 @@ public class ChartProgressBar extends FrameLayout {
 		Drawable d = getResources().getDrawable(mPinDrawable);
 		int h = d.getIntrinsicHeight();
 
-		if(mPinMarginBottom != 0)
+		if (mPinMarginBottom != 0)
 			h += mPinMarginBottom / 2;
 
 		linearLayout.setPadding(0, h, 0, 0);
@@ -678,6 +678,49 @@ public class ChartProgressBar extends FrameLayout {
 						}
 					}
 				}
+			}
+		}
+	}
+
+	public void selectBar(int index) {
+
+		final int barsCount = ((LinearLayout) this.getChildAt(0)).getChildCount();
+
+		for (int i = 0; i < barsCount; i++) {
+
+			FrameLayout rootFrame = (FrameLayout) ((LinearLayout) this.getChildAt(0)).getChildAt(i);
+
+			int rootChildCount = rootFrame.getChildCount();
+
+			for (int j = 0; j < rootChildCount; j++) {
+
+				if ((int) rootFrame.getTag() != index)
+					continue;
+
+				if (oldFrameLayout != null)
+					clickBarOff(oldFrameLayout);
+
+				clickBarOn(rootFrame);
+				oldFrameLayout = rootFrame;
+			}
+		}
+	}
+
+	public void deselectBar(int index) {
+		final int barsCount = ((LinearLayout) this.getChildAt(0)).getChildCount();
+
+		for (int i = 0; i < barsCount; i++) {
+
+			FrameLayout rootFrame = (FrameLayout) ((LinearLayout) this.getChildAt(0)).getChildAt(i);
+
+			int rootChildCount = rootFrame.getChildCount();
+
+			for (int j = 0; j < rootChildCount; j++) {
+
+				if ((int) rootFrame.getTag() != index)
+					continue;
+
+				clickBarOff(rootFrame);
 			}
 		}
 	}

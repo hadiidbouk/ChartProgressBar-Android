@@ -262,6 +262,8 @@ public class ChartProgressBar extends FrameLayout {
 
 	private void setPins() {
 
+		pins.clear();
+		
 		int maxValue = (int) (mMaxValue * 100);
 
 		int childCount = getChildCount();

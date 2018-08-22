@@ -20,7 +20,7 @@
 		app:hdBarWidth="7dp"
 		app:hdBarRadius="10dp"
 		app:hdMaxValue="10"
-		app:hdEmptyColor="@color/empty"
+		app:hdEmptyColor="@color/bar_title_txt_selected_color"
 		app:hdProgressColor="@color/progress"
 		app:hdProgressClickColor="@color/progress_click"
 		app:hdPinBackgroundColor="@color/pin_background"

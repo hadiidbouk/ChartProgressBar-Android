@@ -22,22 +22,22 @@ public class MainActivity extends AppCompatActivity implements OnBarClickedListe
 
 		ArrayList<BarData> dataList = new ArrayList<>();
 
-		BarData data = new BarData("Sep", 3.4f, "3.4€");
+		BarData data = new BarData("Sep", 3.4f, "3.4€", 10f);
 		dataList.add(data);
 
-		data = new BarData("Oct", 8.0f, "8.0€");
+		data = new BarData("Oct", 8.0f, "8.0€", 20f);
 		dataList.add(data);
 
-		data = new BarData("Nov", 1.8f, "1.8€");
+		data = new BarData("Nov", 1.8f, "1.8€", 40f);
 		dataList.add(data);
 
-		data = new BarData("Dec", 7.3f, "7.3€");
+		data = new BarData("Dec", 7.3f, "7.3€", 100f);
 		dataList.add(data);
 
-		data = new BarData("Jan", 6.2f, "6.2€");
+		data = new BarData("Jan", 6.2f, "6.2€", 25f);
 		dataList.add(data);
 
-		data = new BarData("Feb", 3.3f, "3.3€");
+		data = new BarData("Feb", 3.3f, "3.3€", 20f);
 		dataList.add(data);
 
 		mChart = (ChartProgressBar) findViewById(R.id.ChartProgressBar);

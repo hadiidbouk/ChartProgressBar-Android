@@ -141,6 +141,7 @@ public class ChartProgressBar extends FrameLayout {
 		int i = 0;
 		for (BarData data : mDataList) {
 			int barValue = (int) (data.getBarValue() * 100);
+			mMaxValue = data.getMaxValue();
 			FrameLayout bar = getBar(data.getBarTitle(), barValue, i);
 			linearLayout.addView(bar);
 			i++;
